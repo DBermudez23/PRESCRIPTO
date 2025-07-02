@@ -21,11 +21,12 @@ function Login() {
       if (state === 'Admin') {
 
         const {data} = await axios.post(backendUrl + '/api/admin/login', {email,password});
-        console.log();
+        //console.log(data);
 
         if (data.success) {
-          console.log(data.token);
-        }
+          localStorage.setItem('aToken', data.token)
+          setAToken(data.token);
+        } 
 
 
       } else {
