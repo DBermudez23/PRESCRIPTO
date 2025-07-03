@@ -6,3 +6,7 @@
   --grid-template-columns: repeat(4, 1fr);
   --grid-template-columns-mobile: repeat(2, 1fr);
 }
+
+::-webkit-scrollbar {
+  @apply hidden
+}
