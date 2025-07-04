@@ -24,11 +24,11 @@ const addDoctor = async (req, res) => {
         }
 
         //validating strong password
-        if (password.lenght < 8) {
+        if (password.length < 8) {
             return res.json({success:false,message:"Please enter a strong password"});
         }
 
-        // hashing doctor password
+        // hashing password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -82,5 +82,18 @@ const loginAdmin = async (req, res) => {
     }
 }
 
+// API to get all doctor list for admin panel
+const allDoctors = async (req, res) => {
+    try{
+        //Return all doctors --> ({}):No parameters  ('-password'):No include password
+        const doctors = await doctorModel.find({}).select('-password');
+        res.json({success:true,doctors})
 
-export {addDoctor, loginAdmin};
+    } catch (error) {
+        console.log(error);
+        res.json({success:false,message:error.message});
+    }
+}
+
+
+export {addDoctor, loginAdmin, allDoctors};
