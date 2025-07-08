@@ -40,38 +40,36 @@ Prescripto is a fullstack medical appointment booking application built with the
 ## 📁 Project Structure
 
 prescripto/
-├── admin/                 # Admin dashboard (React)
-│   ├── node_modules/
-│   ├── public/
-│   ├── src/
-│   ├── .env
-│   ├── .gitignore
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── README.md
-│   └── vite.config.js
-│
-├── Backend/               # Backend API (Node.js, Express)
-│   ├── config/
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   ├── node_modules/
-│   ├── .env
-│   ├── .gitignore
-│   ├── package.json
-│   ├── package-lock.json
-│   └── server.js
-│
-├── frontend/
+├── admin/ # Admin dashboard (React)
+│ ├── node_modules/
+│ ├── public/
+│ ├── src/
+│ │ └── .env
+│ ├── .gitignore
+│ ├── eslint.config.js
+│ ├── index.html
+│ ├── package.json
+│ ├── package-lock.json
+│ ├── README.md
+│ └── vite.config.js
+├── Backend/ # Backend API (Node.js, Express)
+│ ├── config/
+│ ├── controllers/
+│ ├── middlewares/
+│ ├── models/
+│ ├── routes/
+│ ├── node_modules/
+│ ├── .env
+│ ├── .gitignore
+│ ├── package.json
+│ ├── package-lock.json
+│ └── server.js
+├── frontend/ # Main client app (React)
 │ ├── components/
 │ ├── pages/
 │ ├── context/
-│ └── assets/
-└── README.md
+│ ├── assets/
+│ └── README.md
 
 ## 🚀 Getting Started
 
