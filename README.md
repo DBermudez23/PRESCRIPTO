@@ -32,11 +32,9 @@ Prescripto is a fullstack medical appointment booking application built with the
 - **Frontend**: React, React Router, Axios, Tailwind CSS, Toastify
 - **Backend**: Node.js, Express.js, JWT Authentication, Cloudinary (for image uploads), Multer
 - **Database**: MongoDB Atlas
-- **Testing**: Postman (manual), Jest + Supertest (planned)
-- **Deployment**: Railway
+- **Testing**: Postman (manual)
 
----
-
+```
 ## 📁 Project Structure
 
 prescripto/
@@ -70,6 +68,7 @@ prescripto/
 │ ├── context/
 │ ├── assets/
 │ └── README.md
+``` 
 
 ## 🚀 Getting Started
 
