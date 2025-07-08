@@ -56,15 +56,25 @@ const Appointment = () => {
       let timeSlots = []; // Array to hold the available time slots for the current date
 
       while (currentDate < endTime) {
-        //Formatting the date to a readable format (e.g., "10:00 AM")
-        let formattedDate = currentDate.toLocaleDateString([], { hour : '2-digit', minute: '2-digit' });
+        //Formatting the date to a readable format (e.g., "10:00")
+        let formattedDate = currentDate.toLocaleTimeString([], { hour : '2-digit', minute: '2-digit' });
+        
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
 
-        //Add slot to array
-        timeSlots.push({
+        const slotDate = day + '_' + month + '_' + year;
+        const slotTime = formattedDate;
+
+        const isSlotAvalaible = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true;
+        
+        if (isSlotAvalaible) {
+          //Add slot to array
+          timeSlots.push({
           date: new Date(currentDate), // Storing the date object for the slot
           time: formattedDate, // Storing the formatted time string for the slot
         });
-
+        }
         //Increment current date (hours and minutes) by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
@@ -173,8 +183,8 @@ const Appointment = () => {
 
         <div className='flex items-center gap-3 w-full overflow-x-scroll mt-4'>
           {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => (
-            <p onClick={() => setSlotTime(item.time.split(", ")[1])} className={`text-sm font-ligth flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time.split(", ")[1] === slotTime ? 'bg-primary-500 text-white ' : 'text-gray-400 border border-gray-300'}`} key={index}>
-              {item.time.split(", ")[1]}
+            <p onClick={() => setSlotTime(item.time)} className={`text-sm font-ligth flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time.split === slotTime ? 'bg-primary-500 text-white ' : 'text-gray-400 border border-gray-300'}`} key={index}>
+              {item.time}
             </p>
           ))}
         </div>
