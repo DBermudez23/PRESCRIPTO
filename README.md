@@ -79,6 +79,7 @@ prescripto/
 
 ### Backend Setup
 
+```
 cd backend
 npm install
 
@@ -90,9 +91,11 @@ npm install
 # CLOUDINARY_API_SECRET=...
 
 npm run server
-
+```
 
 ### Frontend Setup
+```
 cd frontend
 npm install
 npm start
+```
