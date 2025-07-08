@@ -167,6 +167,7 @@ const bookAppointment = async (req, res) => {
         userData,
         docData,
         amount: docData.fees,
+        cancelled: false,
         slotTime,
         slotDate,
         date: Date.now()
@@ -188,7 +189,58 @@ const bookAppointment = async (req, res) => {
         console.log(error);
         res.json({ success: false, message: error.message });
     }
-};
+}
+
+// API to get user appointments for frontend
+const listAppointment =  async (req,res) => {
+    try {
+        
+        const userId = req.userId;
+        const appointments = await appointmentModel.find({userId});
+
+        res.json({success:true,appointments});
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// API to cancel appointment
+const cancelAppointment = async (req,res) => {
+    try {
+        
+        const { appointmentId } = req.body;
+        const userId = req.userId;
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+
+        // Verify appointment user
+        if (appointmentData.userId !== userId) {
+            res.json({success:false,message:'Unauthorized action'});
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled:true});
+
+        // Releasing doctor slot
+        const {docId, slotDate, slotTime} = appointmentData;
+        
+        const doctorData = await doctorModel.findById(docId);
+
+        let slots_booked = doctorData.slots_booked;
+
+        slots_booked[slotDate] = slots_booked[slotDate].filter(e => e != slotTime);
+
+        await doctorModel.findByIdAndUpdate(docId, {slots_booked});
+
+        res.json({success:true,message:'Appointment Cancelled'});
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
 
 
-export {registerUser, loginUser, getProfile, updateProfile, bookAppointment};
+
+export {registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment};

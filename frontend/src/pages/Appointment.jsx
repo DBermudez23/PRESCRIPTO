@@ -183,7 +183,7 @@ const Appointment = () => {
 
         <div className='flex items-center gap-3 w-full overflow-x-scroll mt-4'>
           {docSlots.length > 0 && docSlots[slotIndex].map((item, index) => (
-            <p onClick={() => setSlotTime(item.time)} className={`text-sm font-ligth flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time.split === slotTime ? 'bg-primary-500 text-white ' : 'text-gray-400 border border-gray-300'}`} key={index}>
+            <p onClick={() => setSlotTime(item.time)} className={`text-sm font-ligth flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary-500 text-white ' : 'text-gray-400 border border-gray-300'}`} key={index}>
               {item.time}
             </p>
           ))}
