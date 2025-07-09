@@ -241,6 +241,35 @@ const cancelAppointment = async (req,res) => {
     }
 }
 
+// API for payOnline simulation (I will apply the real logic later.)
+const paymentAppointment = async (req,res) => {
+
+    try {
+
+        const {appointmentId} = req.body;
+        const userId = req.userId;
+
+        const appointmentData = await appointmentModel.findById(appointmentId);
+
+        if (appointmentData.userId !== userId) {
+            return res.json({success:false,message:'Incorrect User'});
+        }
+
+        if (!appointmentData || appointmentData.cancelled) {
+            return res.json({success:false,message:'Appointment cancelled or not found'});
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId, {payment:true});
+
+        res.json({success:true,message:'Appointemnt paid succesfully'});
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+
+}
 
 
-export {registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment};
+
+export {registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, paymentAppointment};
