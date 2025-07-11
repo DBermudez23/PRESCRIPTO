@@ -17,8 +17,8 @@ function TopDoctors() {
             <div onClick={()=> {navigate(`/appointment/${item._id}`) ; scrollTo(0, 0)}} key={index} className='border border-blue-200 rounded-xl overflox-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'>
                 <img className='bg-blue-50' src={item.image} alt="" />
                 <div className='p-4'>
-                    <div className='flex items-center gap-2 text-sm text-center text-green-500'>
-                        <p className='w-2 h-2 bg-green-500 rounded-full'></p><p>Avalaible</p>
+                    <div className={`flex items-center gap-2 text-sm text-center ${item.avalaible ? 'text-green-500' : 'text-gray-500' }`}>
+                        <p className={`w-2 h-2 ${item.avalaible ? 'bg-green-500' :  'bg-gray-500'}  rounded-full`}></p><p>{item.avalaible ?'Avalaible': 'Not Avalaible' }</p>
                     </div>
                     <p className='text-gray-900 text-lg font-medium'>{item.name}</p>
                     <p className='text-gray-600 text-sm'>{item.speciality}</p>

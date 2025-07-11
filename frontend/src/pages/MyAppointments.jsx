@@ -96,14 +96,14 @@ const MyAppointments = () => {
             <div className='flex flex-col gap-2 justify-end'>
               <div className='flex flex-col gap-2 justify-end'>
                 {/* If appointment is paid and not cancelled, show payment completed */}
-                {item.payment && !item.cancelled && (
+                {item.payment && !item.cancelled && !item.isCompleted && (
                   <button className='sm:min-w-48 py-2 border border-gray-300 rounded text-gray-400'>
                     Payment completed
                   </button>
                 )}
 
                 {/* If appointment is not paid and not cancelled, show pay and cancel buttons */}
-                {!item.payment && !item.cancelled && (
+                {!item.payment && !item.cancelled && !item.isCompleted &&(
                   <>
                     <button
                       onClick={() => paymentAppointment(item._id)}
@@ -119,11 +119,19 @@ const MyAppointments = () => {
                 )}
 
                 {/* If appointment is cancelled, show cancelled status */}
-                {item.cancelled && (
+                {item.cancelled && !item.isCompleted &&(
                   <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>
                     Appointment cancelled
                   </button>
                 )}
+
+                {/* If appointment is completed, show completed status */}
+                {!item.cancelled && item.isCompleted &&(
+                  <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>
+                    Completed
+                  </button>
+                )}
+
               </div>
             </div>
           </div>
